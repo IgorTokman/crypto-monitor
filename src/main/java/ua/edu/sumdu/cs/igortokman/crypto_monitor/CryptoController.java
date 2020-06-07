@@ -15,11 +15,6 @@ public class CryptoController {
     public CryptoController() {
     }
 
-    @GetMapping("/quotes/{id}")
-    public Mono<CryptoQuote> find(@PathVariable("id") String id) {
-        return Mono.just(new CryptoQuote());
-    }
-
     @GetMapping(value = "/quotes", produces = MediaType.APPLICATION_STREAM_JSON_VALUE)
     public Flux<CryptoQuote> list() {
         return Flux.just(new CryptoQuote());

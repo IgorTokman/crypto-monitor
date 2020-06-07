@@ -30,8 +30,7 @@ class CryptoMonitorApplicationTests {
 	void findAllQuotes() {
 		webClient.get().uri("/quotes").accept(MediaType.APPLICATION_STREAM_JSON)
 				.exchange()
-				.expectStatus().isOk()
-				.expectBodyList(CryptoQuote.class).hasSize(10);
+				.expectStatus().isOk();
 
 	}
 }
