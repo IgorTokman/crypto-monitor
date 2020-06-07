@@ -12,19 +12,16 @@ import java.awt.*;
 @RestController
 public class CryptoController {
 
-    private final CryptoQuoteService quoteService;
-
-    public CryptoController(CryptoQuoteService quoteService) {
-        this.quoteService = quoteService;
+    public CryptoController() {
     }
 
     @GetMapping("/quotes/{id}")
     public Mono<CryptoQuote> find(@PathVariable("id") String id) {
-        return quoteService.findById(Integer.parseInt(id));
+        return Mono.just(new CryptoQuote());
     }
 
     @GetMapping(value = "/quotes", produces = MediaType.APPLICATION_STREAM_JSON_VALUE)
     public Flux<CryptoQuote> list() {
-        return quoteService.findAll();
+        return Flux.just(new CryptoQuote());
     }
 }

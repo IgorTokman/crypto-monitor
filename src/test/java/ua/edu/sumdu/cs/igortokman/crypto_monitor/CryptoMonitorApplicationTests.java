@@ -31,7 +31,7 @@ class CryptoMonitorApplicationTests {
 		webClient.get().uri("/quotes").accept(MediaType.APPLICATION_STREAM_JSON)
 				.exchange()
 				.expectStatus().isOk()
-				.expectBodyList(CryptoQuote.class).hasSize(CryptoQuoteService.GENERAL_CRYPTO_QUOTE_AMOUNT);
+				.expectBodyList(CryptoQuote.class).hasSize(10);
 
 	}
 }
