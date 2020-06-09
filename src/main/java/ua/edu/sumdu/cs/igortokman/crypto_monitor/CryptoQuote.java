@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Document(collection="quotes")
@@ -13,7 +14,7 @@ public class CryptoQuote {
     @Id
     private String id;
     private String exchange;
-    private Timestamp ts;
+    private Date ts;
     private String currency;
     private double bid;
     private double ask;
@@ -24,20 +25,28 @@ public class CryptoQuote {
     public CryptoQuote() {
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Date getTs() {
+        return ts;
+    }
+
+    public void setTs(Date ts) {
+        this.ts = ts;
+    }
+
     public String getExchange() {
         return exchange;
     }
 
     public void setExchange(String exchange) {
         this.exchange = exchange;
-    }
-
-    public Timestamp getTs() {
-        return ts;
-    }
-
-    public void setTs(Timestamp ts) {
-        this.ts = ts;
     }
 
     public String getCurrency() {

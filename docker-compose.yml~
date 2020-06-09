@@ -1,0 +1,35 @@
+version: '2'
+services:
+  dbstate:
+    image: 'gliderlabs/alpine'
+    volumes:
+      - /data/db
+
+  mongo:
+    image: 'mongo'
+    volumes_from:
+      - dbstate
+    ports:
+      - "27017:27017"
+
+  #proxy:
+  #  image: 'nginx'
+  #  restart: always
+  #  volumes:
+  #    - ./proxy/app.conf:/etc/nginx/conf.d/app.conf
+  #  ports:
+  #    - "8080:8080"
+  #  links:
+  #    - crypto-monitor
+
+  crypto-monitor:
+    build: .
+    ports:
+      - "8080:8080"
+#    depends_on:
+#      - mongo
+    links:
+      - mongo
+#    environment:
+#      - CRYPTO_DB_URI=mongodb://db
+#      - CRYPTO_DB_PORT=27017
