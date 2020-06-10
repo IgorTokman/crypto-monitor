@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class CommandLineAppStartupRunner implements CommandLineRunner {
 
-
     private Logger logger = LoggerFactory.getLogger(CommandLineAppStartupRunner.class);
 
     @Autowired
@@ -20,15 +19,15 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
     @Value("${spring.data.mongodb.uri}")
     private String uri;
 
+    @Value("${crypto.ticker.symbol}")
+    private String symbol;
+
     @Override
     public void run(String...args) throws Exception {
 
-        logger.info("=============uri=============");
-        logger.info(uri);
-
         CryptoQuote quote = new CryptoQuote();
-        quote.setAsk(123.456);
-        quote.setBid(789.123);
+//        quote.setAsk(123.456);
+//        quote.setBid(789.123);
 
         cryptoQuoteRepository.save(quote);
     }

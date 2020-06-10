@@ -5,6 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.concurrent.ConcurrentHashMap;
@@ -14,7 +15,7 @@ public class CryptoQuote {
     @Id
     private String id;
     private String exchange;
-    private Date ts;
+    private Timestamp ts;
     private String currency;
     private double bid;
     private double ask;
@@ -33,20 +34,20 @@ public class CryptoQuote {
         this.id = id;
     }
 
-    public Date getTs() {
-        return ts;
-    }
-
-    public void setTs(Date ts) {
-        this.ts = ts;
-    }
-
     public String getExchange() {
         return exchange;
     }
 
     public void setExchange(String exchange) {
         this.exchange = exchange;
+    }
+
+    public Timestamp getTs() {
+        return ts;
+    }
+
+    public void setTs(Timestamp ts) {
+        this.ts = ts;
     }
 
     public String getCurrency() {
@@ -95,5 +96,20 @@ public class CryptoQuote {
 
     public void setHigh(double high) {
         this.high = high;
+    }
+
+    @Override
+    public String toString() {
+        return "CryptoQuote{" +
+                "id='" + id + '\'' +
+                ", exchange='" + exchange + '\'' +
+                ", ts=" + ts +
+                ", currency='" + currency + '\'' +
+                ", bid=" + bid +
+                ", ask=" + ask +
+                ", last_price=" + last_price +
+                ", volume=" + volume +
+                ", high=" + high +
+                '}';
     }
 }
