@@ -11,6 +11,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.net.URI;
@@ -33,11 +34,9 @@ public class Ticker {
     @Scheduled(fixedRate = 5000L)
     public void scheduleTradeEvents() throws InterruptedException {
         CryptoQuote quote = request.exchange().block().bodyToMono(CryptoQuote.class).block();
+        cryptoQuoteRepository.save(quote).subscribe();
 
-        logger.info(String.valueOf(quote));
-
-        cryptoQuoteRepository.save(quote);
-        logger.info("===================");
+        cryptoQuoteRepository.findAll().subscribe(item -> logger.info("{}", item));
     }
 
 }
