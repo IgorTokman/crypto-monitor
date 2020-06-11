@@ -17,9 +17,6 @@ public class Ticker {
     @Autowired
     private CryptoQuoteRepository cryptoQuoteRepository;
 
-    @Value("${crypto.ticker.symbol}")
-    private String symbol;
-
     WebClient.RequestHeadersSpec<?> request = WebClient
             .create("https://api.bitfinex.com/v1/pubticker/bttbtc")
             .get();

@@ -1,9 +1,6 @@
 package ua.edu.sumdu.cs.igortokman.crypto_monitor.domain;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.stereotype.Service;
@@ -17,6 +14,9 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 @Document(collection="quotes")
 public class CryptoQuote implements Serializable {
     @Id

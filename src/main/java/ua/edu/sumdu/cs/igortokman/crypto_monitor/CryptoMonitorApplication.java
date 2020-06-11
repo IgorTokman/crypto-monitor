@@ -14,26 +14,20 @@ import org.springframework.web.socket.client.standard.StandardWebSocketClient;
 @EnableReactiveMongoRepositories
 @SpringBootApplication
 public class CryptoMonitorApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.run(CryptoMonitorApplication.class, args);
-	}
-
 	private final String webSocketUri = "wss://api-pub.bitfinex.com/ws/2";
 
 	@Bean
 	public WebSocketConnectionManager wsConnectionManager() {
-
-		//Generates a web socket connection
 		WebSocketConnectionManager manager = new WebSocketConnectionManager(
 				new StandardWebSocketClient(),
-				new SimpleWsHandler(), //Must be defined to handle messages
+				new SimpleWsHandler(),
 				this.webSocketUri);
-
-		//Will connect as soon as possible
 		manager.setAutoStartup(true);
 
 		return manager;
 	}
 
+	public static void main(String[] args) {
+		SpringApplication.run(CryptoMonitorApplication.class, args);
+	}
 }
