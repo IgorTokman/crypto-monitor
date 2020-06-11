@@ -34,6 +34,6 @@ public class Ticker {
         quote.setExchange(String.valueOf(++index));
         cryptoQuoteRepository.save(quote).subscribe();
 
-        cryptoQuoteRepository.findAll().subscribe(item -> logger.info("{}", item));
+        cryptoQuoteRepository.findAll().subscribe(/*item -> logger.info("{}", item)*/);
     }
 }
