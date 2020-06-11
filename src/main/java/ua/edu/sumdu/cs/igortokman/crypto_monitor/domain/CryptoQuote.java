@@ -1,4 +1,4 @@
-package ua.edu.sumdu.cs.igortokman.crypto_monitor;
+package ua.edu.sumdu.cs.igortokman.crypto_monitor.domain;
 
 import lombok.Data;
 import lombok.Getter;
@@ -14,8 +14,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.concurrent.ConcurrentHashMap;
 
-@Getter
-@Setter
+@Data
 @Document(collection="quotes")
 public class CryptoQuote implements Serializable {
     @Id
@@ -28,4 +27,12 @@ public class CryptoQuote implements Serializable {
     private double last_price;
     private double volume;
     private double high;
+
+    public String getExchange() {
+        return exchange;
+    }
+
+    public void setExchange(String exchange) {
+        this.exchange = exchange;
+    }
 }

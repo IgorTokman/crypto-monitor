@@ -1,22 +1,17 @@
-package ua.edu.sumdu.cs.igortokman.crypto_monitor;
+package ua.edu.sumdu.cs.igortokman.crypto_monitor.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import org.springframework.web.reactive.function.client.ClientResponse;
+import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
+import ua.edu.sumdu.cs.igortokman.crypto_monitor.domain.CryptoQuote;
+import ua.edu.sumdu.cs.igortokman.crypto_monitor.repository.CryptoQuoteRepository;
 
-import java.net.URI;
-
-@Component
+@Service
 public class Ticker {
 
     @Autowired
@@ -31,12 +26,14 @@ public class Ticker {
 
     private Logger logger = LoggerFactory.getLogger(Ticker.class);
 
+    private int index = 0;
+
     @Scheduled(fixedRate = 5000L)
     public void scheduleTradeEvents() throws InterruptedException {
         CryptoQuote quote = request.exchange().block().bodyToMono(CryptoQuote.class).block();
+        quote.setExchange(String.valueOf(++index));
         cryptoQuoteRepository.save(quote).subscribe();
 
         cryptoQuoteRepository.findAll().subscribe(item -> logger.info("{}", item));
     }
-
 }
