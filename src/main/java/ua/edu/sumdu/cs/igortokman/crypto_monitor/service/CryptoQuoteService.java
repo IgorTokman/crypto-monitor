@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.Disposable;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 import ua.edu.sumdu.cs.igortokman.crypto_monitor.domain.CryptoQuote;
 import ua.edu.sumdu.cs.igortokman.crypto_monitor.repository.CryptoQuoteRepository;
 
@@ -40,5 +41,15 @@ public class CryptoQuoteService {
 
     public Flux<CryptoQuote> findBy() {
         return cryptoQuoteRepository.findBy();
+    }
+
+    public void save(CryptoQuote quote) {
+        Mono<CryptoQuote> save = cryptoQuoteRepository.save(quote);
+        System.out.println("///////////////");
+        System.out.println(save);
+        System.out.println("==============");
+        save.subscribe();
+        System.out.println(save);
+        System.out.println("------------");
     }
 }

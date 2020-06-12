@@ -18,7 +18,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @AllArgsConstructor
 @ToString
 @Document(collection="quotes")
-public class CryptoQuote implements Serializable {
+public class CryptoQuote {
     @Id
     private String id;
     private String exchange;
@@ -29,4 +29,5 @@ public class CryptoQuote implements Serializable {
     private double last_price;
     private double volume;
     private double high;
+    private double low;
 }
