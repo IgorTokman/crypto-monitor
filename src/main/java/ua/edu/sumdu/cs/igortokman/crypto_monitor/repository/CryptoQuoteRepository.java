@@ -11,7 +11,7 @@ import java.sql.Timestamp;
 @Repository
 public interface CryptoQuoteRepository extends ReactiveCrudRepository<CryptoQuote, String> {
     @Tailable
-    Flux<CryptoQuote> findBy();
+    Flux<CryptoQuote> findByTsGreaterThanEqual(long ts);
 
 
 }

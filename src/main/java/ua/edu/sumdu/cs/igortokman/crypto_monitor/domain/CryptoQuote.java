@@ -1,5 +1,6 @@
 package ua.edu.sumdu.cs.igortokman.crypto_monitor.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -20,14 +21,19 @@ import java.util.concurrent.ConcurrentHashMap;
 @Document(collection="quotes")
 public class CryptoQuote {
     @Id
+    @JsonIgnore
     private String id;
     private String exchange;
-    private Timestamp ts;
+    private long ts;
     private String currency;
     private double bid;
     private double ask;
+    @JsonIgnore
     private double last_price;
+    @JsonIgnore
     private double volume;
+    @JsonIgnore
     private double high;
+    @JsonIgnore
     private double low;
 }

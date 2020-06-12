@@ -32,7 +32,7 @@ public class TickerConverter {
             result = CryptoQuote.builder()
                     .currency("BTCUSD")
                     .exchange("bitfinex")
-                    .ts(new Timestamp(System.currentTimeMillis()))
+                    .ts(System.currentTimeMillis())
                     .bid(Double.parseDouble(matcher.group("bid")))
                     .ask(Double.parseDouble(matcher.group("ask")))
                     .last_price(Double.parseDouble(matcher.group("lastprice")))

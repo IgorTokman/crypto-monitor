@@ -38,18 +38,4 @@ public class CryptoQuoteService {
                         )
                 ).subscribe();
     }
-
-    public Flux<CryptoQuote> findBy() {
-        return cryptoQuoteRepository.findBy();
-    }
-
-    public void save(CryptoQuote quote) {
-        Mono<CryptoQuote> save = cryptoQuoteRepository.save(quote);
-        System.out.println("///////////////");
-        System.out.println(save);
-        System.out.println("==============");
-        save.subscribe();
-        System.out.println(save);
-        System.out.println("------------");
-    }
 }
