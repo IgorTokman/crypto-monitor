@@ -4,14 +4,10 @@ import org.springframework.data.mongodb.repository.Tailable;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
-import ua.edu.sumdu.cs.igortokman.crypto_monitor.domain.CryptoQuote;
-
-import java.sql.Timestamp;
+import ua.edu.sumdu.cs.igortokman.crypto_monitor.domain.Quote;
 
 @Repository
-public interface CryptoQuoteRepository extends ReactiveCrudRepository<CryptoQuote, String> {
+public interface QuoteRepository extends ReactiveCrudRepository<Quote, String> {
     @Tailable
-    Flux<CryptoQuote> findByTsGreaterThanEqual(long ts);
-
-
+    Flux<Quote> findByTsGreaterThanEqual(long ts);
 }

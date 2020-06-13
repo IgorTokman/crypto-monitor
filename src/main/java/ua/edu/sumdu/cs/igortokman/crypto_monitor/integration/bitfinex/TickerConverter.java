@@ -1,15 +1,7 @@
-package ua.edu.sumdu.cs.igortokman.crypto_monitor.helper;
+package ua.edu.sumdu.cs.igortokman.crypto_monitor.integration.bitfinex;
 
-import com.google.gson.Gson;
-import lombok.*;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-import ua.edu.sumdu.cs.igortokman.crypto_monitor.domain.CryptoQuote;
+import ua.edu.sumdu.cs.igortokman.crypto_monitor.domain.Quote;
 
-import java.io.Serializable;
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -23,15 +15,15 @@ public class TickerConverter {
             "(?<lastprice>-?\\d+(?:\\.\\d+)?),(?<volume>-?\\d+(?:\\.\\d+)?)," +
             "(?<high>-?\\d+(?:\\.\\d+)?),(?<low>-?\\d+(?:\\.\\d+)?)]]");
 
-    public CryptoQuote map(String json) {
+    public Quote map(String json) {
         if (!json.endsWith("]]")) { return  null; }
         Matcher matcher = pattern.matcher(json);
 
-        CryptoQuote result = null;
+        Quote result = null;
         while (matcher.find()) {
-            result = CryptoQuote.builder()
-                    .currency("BTCUSD")
-                    .exchange("bitfinex")
+            result = Quote.builder()
+                    .currency(Contract.currency)
+                    .exchange(Contract.exchange)
                     .ts(System.currentTimeMillis())
                     .bid(Double.parseDouble(matcher.group("bid")))
                     .ask(Double.parseDouble(matcher.group("ask")))

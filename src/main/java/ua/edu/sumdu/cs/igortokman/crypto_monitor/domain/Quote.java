@@ -19,7 +19,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @AllArgsConstructor
 @ToString
 @Document(collection="quotes")
-public class CryptoQuote {
+public class Quote {
     @Id
     @JsonIgnore
     private String id;

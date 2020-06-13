@@ -4,21 +4,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
-import ua.edu.sumdu.cs.igortokman.crypto_monitor.repository.CryptoQuoteRepository;
-import ua.edu.sumdu.cs.igortokman.crypto_monitor.domain.CryptoQuote;
-import ua.edu.sumdu.cs.igortokman.crypto_monitor.service.CryptoQuoteService;
-
-import java.sql.Timestamp;
-import java.time.Duration;
+import ua.edu.sumdu.cs.igortokman.crypto_monitor.repository.QuoteRepository;
+import ua.edu.sumdu.cs.igortokman.crypto_monitor.domain.Quote;
+import ua.edu.sumdu.cs.igortokman.crypto_monitor.service.TradingService;
 
 @RestController
 public class CryptoController {
 
     @Autowired
-    private CryptoQuoteRepository repository;
+    private TradingService tradingService;
 
-    @GetMapping(value = "/quotes", produces = MediaType.APPLICATION_STREAM_JSON_VALUE)
-    public Flux<CryptoQuote> list() {
-        return repository.findByTsGreaterThanEqual(System.currentTimeMillis());
+    @GetMapping(value = "/trading-events", produces = MediaType.APPLICATION_STREAM_JSON_VALUE)
+    public Flux<Quote> list() {
+        return tradingService.findQuotesAfter(System.currentTimeMillis());
     }
 }
