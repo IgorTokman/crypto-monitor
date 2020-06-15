@@ -1,0 +1,20 @@
+version: '2'
+services:
+  dbstate:
+    image: 'gliderlabs/alpine'
+    volumes:
+      - /data/db
+
+  mongo:
+    image: 'mongo'
+    volumes_from:
+      - dbstate
+    ports:
+      - "27017:27017"
+
+  crypto-monitor:
+    build: .
+    ports:
+      - "8080:8080"
+    links:
+      - mongo
