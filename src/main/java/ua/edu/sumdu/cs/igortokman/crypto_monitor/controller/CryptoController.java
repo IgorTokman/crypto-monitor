@@ -18,9 +18,4 @@ public class CryptoController {
     public Flux<Quote> findLast() {
         return tradingService.findQuotesAfter(System.currentTimeMillis());
     }
-
-    @GetMapping(value = "/")
-    public String test() {
-        return "testing";
-    }
 }
