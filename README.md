@@ -1,4 +1,5 @@
 Application description
+
 This application provides API which allows to get the high level overview of the state of the market.
 It shows you the current best bid and ask for the default BTCUSD currency.
 
